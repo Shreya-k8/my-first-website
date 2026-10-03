@@ -18,11 +18,28 @@
             border-radius: 50%;
             margin-top: 20px;
         }
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Hello, I am Shreya!</h1>
     <img src="https://placehold.co/150" alt="My Profile Picture">
     <p>I am learning Full Stack Development.</p>
+    
+    <button id="myBtn">Click Me!</button>
+
+    <script>
+        document.getElementById("myBtn").addEventListener("click", function() {
+            alert("Hello! You clicked my button. Welcome to my website!");
+        });
+    </script>
 </body>
 </html>
