@@ -45,6 +45,7 @@
     
     <button id="myBtn">Click Me!</button>
     <button id="darkBtn">Dark Mode</button>
+    <button id="lightBtn">Light Mode</button>
 
     <script>
         document.getElementById("myBtn").addEventListener("click", function() {
@@ -56,6 +57,13 @@
             document.querySelector("h1").style.color = "white";
             document.querySelector("p").style.color = "white";
             document.querySelector("a").style.color = "lightblue";
+        });
+
+        document.getElementById("lightBtn").addEventListener("click", function() {
+            document.body.style.backgroundColor = "lightblue";
+            document.querySelector("h1").style.color = "darkblue";
+            document.querySelector("p").style.color = "black";
+            document.querySelector("a").style.color = "darkblue";
         });
     </script>
 </body>
