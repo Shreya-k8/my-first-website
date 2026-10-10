@@ -46,11 +46,18 @@
     <button id="myBtn">Click Me!</button>
     <button id="darkBtn">Dark Mode</button>
     <button id="lightBtn">Light Mode</button>
+    <button id="resetBtn">Reset</button>
 
     <script>
         document.getElementById("myBtn").addEventListener("click", function() {
             document.body.style.backgroundColor = "pink";
         });
+        document.getElementById("resetBtn").addEventListener("click", function() {
+    document.body.style.backgroundColor = "lightblue";
+    document.querySelector("h1").style.color = "darkblue";
+    document.querySelector("p").style.color = "black";
+    document.querySelector("a").style.color = "darkblue";
+});
 
         document.getElementById("darkBtn").addEventListener("click", function() {
             document.body.style.backgroundColor = "black";
