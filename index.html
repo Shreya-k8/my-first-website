@@ -3,66 +3,77 @@
 <head>
     <title>Shreya's Website</title>
     <style>
-    body {
-        background-color: lightblue;
-        text-align: center;
-    }
-    h1 {
-        color: darkblue;
-    }
-    p {
-        color: black;
-        font-size: 18px;
-    }
-    img {
-        border-radius: 50%;
-        margin-top: 20px;
-    }
-    button {
-        background-color: orange;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        margin-top: 20px;
-        margin-right: 10px;
-        transition: 0.3s;
-    }
-    button:hover {
-        transform: scale(1.1);
-    }
-    a {
-        display: block;
-        margin-top: 20px;
-        color: darkblue;
-        font-size: 18px;
-    }
+        body {
+            background-color: lightblue;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: darkblue;
+        }
+        h2 {
+            color: darkred;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+        p {
+            color: black;
+            font-size: 18px;
+        }
+        img {
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        button {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+        button:active {
+            transform: scale(1.1);
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            color: darkblue;
+            font-size: 18px;
+        }
     </style>
-    
 </head>
 <body>
     <h1>Hello, I am Shreya!</h1>
+    
+    <!-- THIS IS THE NEW CLOCK -->
+    <h2 id="clock">Loading time...</h2>
+
     <img src="https://placehold.co/150" alt="My Profile Picture">
     <p>I am learning Full Stack Development.</p>
     
     <a href="https://github.com/Shreya-k8" target="_blank">Visit my GitHub Profile</a>
     
-    <button id="myBtn">surprise!</button>
+    <button id="myBtn">Click Me!</button>
     <button id="darkBtn">Dark Mode</button>
     <button id="lightBtn">Light Mode</button>
     <button id="resetBtn">Reset</button>
 
     <script>
+        // Clock Logic
+        setInterval(function() {
+            let now = new Date();
+            let time = now.toLocaleTimeString();
+            document.getElementById("clock").innerText = time;
+        }, 1000);
+
+        // Existing Button Logic
         document.getElementById("myBtn").addEventListener("click", function() {
             document.body.style.backgroundColor = "pink";
         });
-        document.getElementById("resetBtn").addEventListener("click", function() {
-    document.body.style.backgroundColor = "lightblue";
-    document.querySelector("h1").style.color = "darkblue";
-    document.querySelector("p").style.color = "black";
-    document.querySelector("a").style.color = "darkblue";
-});
 
         document.getElementById("darkBtn").addEventListener("click", function() {
             document.body.style.backgroundColor = "black";
@@ -72,6 +83,13 @@
         });
 
         document.getElementById("lightBtn").addEventListener("click", function() {
+            document.body.style.backgroundColor = "lightblue";
+            document.querySelector("h1").style.color = "darkblue";
+            document.querySelector("p").style.color = "black";
+            document.querySelector("a").style.color = "darkblue";
+        });
+
+        document.getElementById("resetBtn").addEventListener("click", function() {
             document.body.style.backgroundColor = "lightblue";
             document.querySelector("h1").style.color = "darkblue";
             document.querySelector("p").style.color = "black";
