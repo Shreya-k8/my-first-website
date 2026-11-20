@@ -3,54 +3,20 @@
 <head>
     <title>Shreya's Website</title>
     <style>
-        body {
-            background-color: lightblue;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: darkblue;
-        }
-        h2 {
-            color: darkred;
-            font-size: 30px;
-            margin-top: 10px;
-        }
-        p {
-            color: black;
-            font-size: 18px;
-        }
-        img {
-            border-radius: 50%;
-            margin-top: 20px;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid gray;
-            margin-top: 20px;
-        }
-        button {
-            background-color: orange;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 20px;
-            margin-right: 10px;
-            transition: 0.3s;
-        }
-        button:active {
-            transform: scale(1.1);
-        }
-        a {
-            display: block;
-            margin-top: 20px;
-            color: darkblue;
-            font-size: 18px;
-        }
+        body { background-color: lightblue; text-align: center; font-family: Arial, sans-serif; }
+        h1 { color: darkblue; }
+        h2 { color: darkred; font-size: 30px; }
+        p { color: black; font-size: 18px; }
+        img { border-radius: 50%; margin-top: 20px; }
+        input, button { padding: 10px; font-size: 16px; border-radius: 5px; margin-top: 10px; border: 1px solid gray; }
+        button { background-color: orange; color: white; border: none; transition: 0.3s; cursor: pointer; margin-right: 10px;}
+        button:active { transform: scale(1.1); }
+        a { display: block; margin-top: 20px; color: darkblue; font-size: 18px; }
+        
+        /* CSS for the To-Do List */
+        ul { list-style-type: none; padding: 0; }
+        li { background: white; margin: 10px auto; padding: 10px; width: 80%; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .delete-btn { background-color: red; padding: 5px 10px; margin: 0; font-size: 14px;}
     </style>
 </head>
 <body>
@@ -62,60 +28,66 @@
     
     <a href="https://github.com/Shreya-k8" target="_blank">Visit my GitHub Profile</a>
     
-    <!-- NEW INPUT & BUTTON -->
+    <!-- EXISTING BUTTONS -->
     <br><br>
     <input type="text" id="nameInput" placeholder="Type your name">
     <button id="greetBtn">Greet Me</button>
     <br><br>
-
-    <button id="myBtn">Click Me!</button>
+    <button id="myBtn">Pink</button>
     <button id="darkBtn">Dark Mode</button>
     <button id="lightBtn">Light Mode</button>
     <button id="resetBtn">Reset</button>
 
+    <!-- THE NEW TO-DO LIST -->
+    <div style="margin-top: 40px; background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px;">
+        <h2 style="color: darkblue;">My To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Enter a new task...">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList">
+            <!-- Tasks will appear here -->
+        </ul>
+    </div>
+
     <script>
-        // Clock Logic
+        // Clock
         setInterval(function() {
-            let now = new Date();
-            let time = now.toLocaleTimeString();
-            document.getElementById("clock").innerText = time;
+            document.getElementById("clock").innerText = new Date().toLocaleTimeString();
         }, 1000);
 
-        // Greeting Logic
+        // Greeting
         document.getElementById("greetBtn").addEventListener("click", function() {
             let name = document.getElementById("nameInput").value;
-            if (name === "") {
-                alert("Please type a name first!");
-            } else {
-                alert("Hello " + name + "! Welcome to my website.");
+            alert(name === "" ? "Please type a name!" : "Hello " + name + "!");
+        });
+
+        // Color Buttons
+        document.getElementById("myBtn").addEventListener("click", function() { document.body.style.backgroundColor = "pink"; });
+        document.getElementById("darkBtn").addEventListener("click", function() { document.body.style.backgroundColor = "black"; document.querySelector("h1").style.color = "white"; });
+        document.getElementById("lightBtn").addEventListener("click", function() { document.body.style.backgroundColor = "lightblue"; document.querySelector("h1").style.color = "darkblue"; });
+        document.getElementById("resetBtn").addEventListener("click", function() { location.reload(); });
+
+        // TO-DO LIST LOGIC (This is the new part!)
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let taskText = input.value;
+
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
             }
-        });
 
-        // Button Logic
-        document.getElementById("myBtn").addEventListener("click", function() {
-            document.body.style.backgroundColor = "pink";
-        });
-
-        document.getElementById("darkBtn").addEventListener("click", function() {
-            document.body.style.backgroundColor = "black";
-            document.querySelector("h1").style.color = "white";
-            document.querySelector("p").style.color = "white";
-            document.querySelector("a").style.color = "lightblue";
-        });
-
-        document.getElementById("lightBtn").addEventListener("click", function() {
-            document.body.style.backgroundColor = "lightblue";
-            document.querySelector("h1").style.color = "darkblue";
-            document.querySelector("p").style.color = "black";
-            document.querySelector("a").style.color = "darkblue";
-        });
-
-        document.getElementById("resetBtn").addEventListener("click", function() {
-            document.body.style.backgroundColor = "lightblue";
-            document.querySelector("h1").style.color = "darkblue";
-            document.querySelector("p").style.color = "black";
-            document.querySelector("a").style.color = "darkblue";
-        });
+            // Create a new list item
+            let li = document.createElement("li");
+            
+            // Add the text and a delete button
+            li.innerHTML = `<span>${taskText}</span> <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>`;
+            
+            // Add it to the list on the screen
+            document.getElementById("taskList").appendChild(li);
+            
+            // Clear the input box
+            input.value = "";
+        }
     </script>
 </body>
 </html>
